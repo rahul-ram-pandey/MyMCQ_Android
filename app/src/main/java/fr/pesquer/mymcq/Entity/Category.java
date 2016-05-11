@@ -4,6 +4,9 @@ import io.realm.RealmObject;
 
 public class Category extends RealmObject {
 
+    /**
+     * Nom de la categorie
+     */
     public String name;
 
     public String getName() {

@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-
+    //TODO : A SUPPRIMER LORS DE LA CONNEXION AVEC LE WEBSERVICE
     public void test() {
         SharedPreferences sharedPref = context.getSharedPreferences(getString(R.string.prefs_file_key), MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();

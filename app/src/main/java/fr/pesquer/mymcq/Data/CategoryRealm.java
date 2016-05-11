@@ -13,6 +13,11 @@ public class CategoryRealm {
         this.realm = Realm.getDefaultInstance();
     }
 
+
+    /**
+     * Ajoute une categorie en Base de données
+     * @param name nom de la categorie.
+     */
     public void add(final String name){
         this.realm.executeTransaction(new Realm.Transaction() {
             @Override

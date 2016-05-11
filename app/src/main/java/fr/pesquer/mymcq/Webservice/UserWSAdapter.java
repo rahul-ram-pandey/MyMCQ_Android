@@ -5,6 +5,13 @@ import com.loopj.android.http.RequestParams;
 
 public class UserWSAdapter {
 
+    /**
+     * Envoie les données de connexion au Webservice
+     * @param email email de l'utilisateur
+     * @param password mot de passe de l'utilisateur
+     * @param responseHandler
+     */
+
     public static void login (String email, String password, AsyncHttpResponseHandler responseHandler){
         RequestParams params = new RequestParams();
         params.put(APIWSAdapter.EMAIL_FIELD, email);

@@ -6,6 +6,12 @@ import com.loopj.android.http.RequestParams;
 public class MCQWSAdapter {
 
 
+    /**
+     * Recuperer la liste des questionnaires sur le webservice.
+     *
+     * @param idUser id de l'utilisateur courant
+     * @param responseHandler
+     */
 
     public static void getAllMCQ(int idUser, AsyncHttpResponseHandler responseHandler){
         RequestParams params = new RequestParams();

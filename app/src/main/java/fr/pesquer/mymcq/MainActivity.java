@@ -51,6 +51,11 @@ public class MainActivity extends AppCompatActivity implements OnMenuTabClickLis
         bottomBar.onSaveInstanceState(outState);
     }
 
+    /**
+     * Method qui permet de passer d'un fragment à un autre
+     * @param fragment Fragment que l'on veut
+     */
+
     public void pushFragment(Fragment fragment) {
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
