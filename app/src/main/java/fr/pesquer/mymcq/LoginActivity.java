@@ -41,6 +41,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if (!email.isEmpty() && !password.isEmpty()){
 
                     test();
+
                     /*APIWSAdapter.login(email,password, new JsonHttpResponseHandler(){
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
