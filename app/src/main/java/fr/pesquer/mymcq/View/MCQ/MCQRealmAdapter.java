@@ -13,11 +13,9 @@ import io.realm.RealmBaseAdapter;
 
 public class MCQRealmAdapter extends RealmBaseAdapter<MCQ> implements ListAdapter {
 
-    OrderedRealmCollection<MCQ> data;
 
-    public MCQRealmAdapter(Context context, OrderedRealmCollection<MCQ> data, boolean automaticUpdate) {
-        super(context, data, automaticUpdate);
-        this.data = data;
+    public MCQRealmAdapter(Context context, OrderedRealmCollection<MCQ> data) {
+        super(context, data);
     }
 
     @Override
@@ -32,7 +30,7 @@ public class MCQRealmAdapter extends RealmBaseAdapter<MCQ> implements ListAdapte
             viewHolder = (MyViewHolder) convertView.getTag();
         }
 
-        MCQ item = data.get(position);
+        MCQ item = adapterData.get(position);
         viewHolder.name.setText(item.name);
         return convertView;
     }

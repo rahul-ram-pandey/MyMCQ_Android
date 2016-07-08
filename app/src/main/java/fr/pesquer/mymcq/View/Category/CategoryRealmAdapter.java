@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.TextView;
-
 import fr.pesquer.mymcq.Entity.Category;
 import fr.pesquer.mymcq.R;
 import io.realm.OrderedRealmCollection;
@@ -13,11 +12,8 @@ import io.realm.RealmBaseAdapter;
 
 public class CategoryRealmAdapter extends RealmBaseAdapter<Category> implements ListAdapter {
 
-    private OrderedRealmCollection<Category> data;
-
-    public CategoryRealmAdapter(Context context, OrderedRealmCollection<Category> data, boolean automaticUpdate) {
-        super(context, data, automaticUpdate);
-        this.data = data;
+    public CategoryRealmAdapter(Context context, OrderedRealmCollection<Category> data) {
+        super(context,data);
     }
 
     @Override
@@ -32,7 +28,7 @@ public class CategoryRealmAdapter extends RealmBaseAdapter<Category> implements 
             viewHolder = (MyViewHolder) convertView.getTag();
         }
 
-        Category item = data.get(position);
+        Category item = adapterData.get(position);
         viewHolder.name.setText(item.name);
         return convertView;
     }
@@ -41,4 +37,5 @@ public class CategoryRealmAdapter extends RealmBaseAdapter<Category> implements 
     private static class MyViewHolder{
         TextView name;
     }
+
 }

@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import fr.pesquer.mymcq.Data.CategoryRealm;
 import fr.pesquer.mymcq.R;
 
 
@@ -28,8 +27,6 @@ public class RuleFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        CategoryRealm request = new CategoryRealm();
-        request.add("test");
     }
 
 }

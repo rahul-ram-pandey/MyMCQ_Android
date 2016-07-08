@@ -25,5 +25,46 @@ public class MCQ extends RealmObject {
     /**
      * id du questionnaire sur le webservice
      */
-    public int idSource;
+    public int idWS;
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public RealmList<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(RealmList<Question> questions) {
+        this.questions = questions;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public RealmList<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(RealmList<User> users) {
+        this.users = users;
+    }
+
+    public int getIdWS() {
+        return idWS;
+    }
+
+    public void setIdWS(int idWS) {
+        this.idWS = idWS;
+    }
 }
