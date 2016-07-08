@@ -9,6 +9,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements OnMenuTabClickLis
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     private Context context;
+    private JSONObject jsonObject;
 
     public ArrayList<Fragment> arrayFragments;
 
@@ -125,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements OnMenuTabClickLis
     }
 
 
-    private void loadDateFromWS() {
+    public void loadDateFromWS() {
         SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.prefs_file_key),Context.MODE_PRIVATE);
         String token = sharedPref.getString(getString(R.string.user_token), null);
         UserWSAdapter.getInfo(token, new Callback() {
@@ -138,8 +141,17 @@ public class MainActivity extends AppCompatActivity implements OnMenuTabClickLis
             public void onResponse(Call call, Response response) throws IOException {
                 if (response.isSuccessful() && response.code() == 200) {
                     try {
-                        JSONObject jsonObject = new JSONObject(response.body().string());
-                        saveData(jsonObject);
+                        jsonObject = new JSONObject(response.body().string());
+                        new Handler(Looper.getMainLooper()).post(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    saveData(jsonObject);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -215,5 +227,6 @@ public class MainActivity extends AppCompatActivity implements OnMenuTabClickLis
         MCQRealm mcqRealm = new MCQRealm();
         mcqRealm.deleteAll();
         mcqRealm.addFromJson(jsonMCQ);
+
     }
 }

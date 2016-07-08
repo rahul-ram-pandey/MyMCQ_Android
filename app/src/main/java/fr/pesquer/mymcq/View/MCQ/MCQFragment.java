@@ -24,6 +24,8 @@ public class MCQFragment extends Fragment implements View.OnClickListener {
     public MCQ currentMCQ;
     private TextView tvTitleMCQ;
     private TextView tvCategoryMCQ;
+
+
     private Button btStartMCQ;
 
     public MCQFragment() {
@@ -42,7 +44,7 @@ public class MCQFragment extends Fragment implements View.OnClickListener {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        tvTitleMCQ = (TextView) getView().findViewById(R.id.tvTitleMCQ);
+        tvTitleMCQ = (TextView) getView().findViewById(R.id.textView2);
         tvTitleMCQ.setText(currentMCQ.getName());
 
         btStartMCQ = (Button) getView().findViewById(R.id.btStartMCQ);

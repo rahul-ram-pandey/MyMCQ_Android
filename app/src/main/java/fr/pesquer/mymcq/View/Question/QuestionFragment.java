@@ -15,10 +15,11 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import fr.pesquer.mymcq.Entity.Answer;
 import fr.pesquer.mymcq.Entity.MCQ;
@@ -40,7 +41,9 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
     public RealmList<Question> test;
     private RealmList<Answer> answers;
     private Question question;
-    private ArrayList<ArrayList<Integer>> userAnswers;
+    //private ArrayList<ArrayList<Integer>> userAnswers;
+
+    private HashMap<String, ArrayList<Integer>> userAnswers;
 
     private ArrayList<CheckBox> checkboxList;
 
@@ -66,7 +69,8 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
         super.onActivityCreated(savedInstanceState);
         current = 0;
         questions = mcq.getQuestions();
-        userAnswers = new ArrayList<>();
+//        userAnswers = new ArrayList<>();
+        userAnswers = new HashMap<>();
         tvQuestionNumber = (TextView) getView().findViewById(R.id.tvQuestionNumber);
         tvTitleMCQ = (TextView) getView().findViewById(R.id.tvTitleMCQ);
         btNextQuestion = (Button) getView().findViewById(R.id.btNextQuestion);
@@ -101,12 +105,23 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
         for (int j=0; j<checkboxList.size(); j++){
             llCheckBox.removeView(checkboxList.get(j));
         }
+
         checkboxList.clear();
+
         for (int i=0; i<answers.size(); i++){
             CheckBox cb = new CheckBox(getActivity());
             Answer answer = answers.get(i);
+
+            if (userAnswers.containsKey(String.valueOf(questions.get(current).getIdWS()))){
+                ArrayList<Integer> test = userAnswers.get(String.valueOf(questions.get(current).getIdWS()));
+                if (test.contains(answer.getIdWS())){
+                    cb.setChecked(true);
+                }
+            }
+
             cb.setText(answer.getText());
             cb.setTag(answer);
+
             llCheckBox.addView(cb);
             checkboxList.add(cb);
         }
@@ -156,7 +171,8 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
                 currentAnswer.add(answer.getIdWS());
             }
         }
-            userAnswers.add(current, currentAnswer);
+            //userAnswers.add(current, currentAnswer);
+        userAnswers.put(String.valueOf(questions.get(current).getIdWS()), currentAnswer);
 
     }
 
@@ -169,17 +185,15 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
     private void saveData() {
         SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.prefs_file_key), Context.MODE_PRIVATE);
         String token = sharedPref.getString(getString(R.string.user_token), null);
-        JSONArray json = new JSONArray(userAnswers);
+        JSONObject json = new JSONObject(userAnswers);
         AnswerWSAdapter.postAnswer(mcq.getIdWS(),json.toString(), token, getActivity() ,  new Callback(){
 
             @Override
             public void onFailure(Call call, IOException e) {
-
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-
             }
         });
     }

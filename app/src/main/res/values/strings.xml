@@ -17,4 +17,5 @@
     <string name="security_client_id">2_4h3gbgm4tyckgsc8scwcs84g8844woog0k4g0cgg4owowcws4s</string>
     <string name="security_client_password">1fwom38lxl8kow044ck4sskswgkwgg8og4wssk4kw0swc8gwo0</string>
     <string name="questionText">Question</string>
+    <string name="wrong_login_text">Login incorrect</string>
 </resources>

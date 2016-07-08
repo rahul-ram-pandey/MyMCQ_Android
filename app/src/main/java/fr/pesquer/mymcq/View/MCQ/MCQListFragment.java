@@ -1,8 +1,6 @@
 package fr.pesquer.mymcq.View.MCQ;
 
 import android.app.ListFragment;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
@@ -10,21 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-
 import fr.pesquer.mymcq.Data.MCQRealm;
 import fr.pesquer.mymcq.Entity.Category;
 import fr.pesquer.mymcq.Entity.MCQ;
 import fr.pesquer.mymcq.R;
 import fr.pesquer.mymcq.View.MainActivity;
-import fr.pesquer.mymcq.Webservice.MCQWSAdapter;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
 
 public class MCQListFragment extends ListFragment {
 
@@ -48,7 +36,7 @@ public class MCQListFragment extends ListFragment {
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.prefs_file_key), Context.MODE_PRIVATE);
+                /*SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.prefs_file_key), Context.MODE_PRIVATE);
                 String token = sharedPref.getString(getString(R.string.user_token), null);
                 MCQWSAdapter.getAllMCQ(token, new Callback() {
                     @Override
@@ -75,7 +63,16 @@ public class MCQListFragment extends ListFragment {
                             swipeContainer.setRefreshing(false);
                         }
                     }
-                });
+                });*/
+                ((MainActivity)getActivity()).loadDateFromWS();
+                swipeContainer.setRefreshing(false);
+                MCQRealm request = new MCQRealm();
+                if (category == null){
+                    adapter = new MCQRealmAdapter(getActivity(), request.getAll());
+                }else{
+                    adapter = new MCQRealmAdapter(getActivity(), request.getAllWithCategory(category));
+                }
+                setListAdapter(adapter);
             }
         });
 

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 
 import fr.pesquer.mymcq.R;
 
@@ -26,7 +27,11 @@ public class RuleFragment extends Fragment {
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
+
         super.onActivityCreated(savedInstanceState);
+
+        WebView wvHelp = (WebView) getView().findViewById(R.id.wvHelp);
+        wvHelp.loadUrl("file:///android_asset/index.html");
     }
 
 }

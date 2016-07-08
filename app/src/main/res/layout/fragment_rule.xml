@@ -11,11 +11,14 @@
         android:layout_height="match_parent"
         >
 
-        <TextView
+        <WebView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Regles du jeu"/>
+            android:layout_height="match_parent"
+            android:id="@+id/wvHelp">
+
+        </WebView>
 
     </ScrollView>
+
 
 </FrameLayout>

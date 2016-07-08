@@ -5,18 +5,11 @@
              tools:context="fr.pesquer.mymcq.View.MCQ.MCQFragment">
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
-        android:id="@+id/tvTitleMCQ"
-        android:layout_gravity="center_horizontal|top"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
+        android:text="lancer le questionnaire"
         android:id="@+id/btStartMCQ"
         android:layout_gravity="center_horizontal|bottom"/>
 

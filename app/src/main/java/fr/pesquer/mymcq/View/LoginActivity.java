@@ -3,6 +3,8 @@ package fr.pesquer.mymcq.View;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -68,7 +70,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     startActivity(intent);
                                     finish();
                                 }else{
-                                   Toast.makeText(context, R.string.empty_field_login, Toast.LENGTH_LONG).show();
+                                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(context, R.string.wrong_login_text, Toast.LENGTH_LONG).show();
+                                        }
+                                    });
                                 }
                             }
                         });
